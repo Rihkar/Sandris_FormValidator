@@ -123,7 +123,7 @@ const App = () => {
           {form.humanOrRobot}
         </span>
       </div>
-      {formRef.current?.checkValidity() && notify()}
+      {formRef.current && formRef.current.checkValidity() && notify()}
       <ToastContainer />
     </div>
   );

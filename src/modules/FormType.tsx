@@ -1,16 +1,16 @@
 export type FormType = {
-    FullName: string,
-    Email: string,
-    PhoneNumber: string,
-    Gender: string,
+    fullName: string,
+    email: string,
+    phoneNumber: string,
+    gender: string,
     humanOrRobot: string,
 }
 
 const Form = {
-  FullName: '',
-  Email: '',
-  PhoneNumber: '',
-  Gender: '',
+  fullName: '',
+  email: '',
+  phoneNumber: '',
+  gender: '',
   humanOrRobot: '',
 
 };

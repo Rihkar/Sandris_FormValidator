@@ -1,6 +1,4 @@
-/* eslint-disable max-len */
-/* eslint-disable @typescript-eslint/no-use-before-define */
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import './Styles/reset.scss';
 import './App.scss';
 import { ToastContainer, toast } from 'react-toastify';
@@ -11,22 +9,21 @@ const customId = 'custom-id-yes';
 
 const App = () => {
   const [form, setForm] = useState<FormType>(Form);
-  const InputRef = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const formRef = useRef<HTMLFormElement | null>(null);
-  const toastRef = useRef(null);
+
   const notify = () => {
-    // @ts-ignore
-    if (!toast.isActive(toastRef.current)) {
-      // @ts-ignore
-      toastRef.current = toast('Ready to Sumbit', {
-        toastId: customId,
-      });
-    }
+    toast('Ready to Submit', {
+      toastId: customId,
+    });
   };
+
   useEffect(() => {
-    // @ts-ignore
-    InputRef.current.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   }, []);
+
   return (
     <div className="container">
       <form action="" ref={formRef}>
@@ -35,24 +32,28 @@ const App = () => {
           pattern="[A-Za-z\s\]{3}"
           placeholder="Fullname"
           required
-          ref={InputRef}
-          value={form?.FullName}
-          onChange={(e) => setForm({ ...form, FullName: e.target.value })}
+          ref={inputRef}
+          value={form.fullName}
+          onChange={(e) => setForm({ ...form, fullName: e.target.value })}
         />
         <input
           type="email"
           placeholder="E-mail"
           required
-          value={form?.Email}
-          onChange={(e) => setForm({ ...form, Email: e.target.value })}
+          value={form.email}
+          onChange={(e) => setForm({ ...form, email: e.target.value })}
         />
         <input
           type="tel"
           pattern="[0-9]{8}"
           placeholder="Phone Number"
           required
-          value={form?.PhoneNumber}
-          onChange={(e) => { if (e.target.value.length < 9) { (setForm({ ...form, PhoneNumber: e.target.value })); } }}
+          value={form.phoneNumber}
+          onChange={(e) => {
+            if (e.target.value.length < 9) {
+              (setForm({ ...form, phoneNumber: e.target.value }));
+            }
+          }}
         />
         <div>
           <label htmlFor="male">
@@ -62,7 +63,7 @@ const App = () => {
               name="gender"
               required
               value="male"
-              onChange={(e) => setForm({ ...form, Gender: e.target.value })}
+              onChange={(e) => setForm({ ...form, gender: e.target.value })}
             />
             Male
           </label>
@@ -73,7 +74,7 @@ const App = () => {
               name="gender"
               required
               value="female"
-              onChange={(e) => setForm({ ...form, Gender: e.target.value })}
+              onChange={(e) => setForm({ ...form, gender: e.target.value })}
             />
             Female
           </label>
@@ -93,37 +94,37 @@ const App = () => {
 
       </form>
       <div>
-        {form?.FullName && (
+        {form.fullName && (
         <span>
-          { `Fullname: ${form?.FullName}`}
+          { `Fullname: ${form.fullName}`}
         </span>
         )}
         <br />
-        {form.Email && (
+        {form.email && (
         <span>
-          { `Email: ${form?.Email}`}
+          { `Email: ${form.email}`}
         </span>
         )}
         <br />
-        {form.PhoneNumber && (
+        {form.phoneNumber && (
         <span>
-          {`Phone number: ${form?.PhoneNumber}`}
+          {`Phone number: ${form.phoneNumber}`}
         </span>
         )}
         <br />
-        {form.Gender && (
+        {form.gender && (
         <span>
-          {`Gender: ${form?.Gender}`}
+          {`Gender: ${form.gender}`}
         </span>
         )}
         <br />
 
         <span>
-          {form?.humanOrRobot}
+          {form.humanOrRobot}
         </span>
       </div>
       {formRef.current?.checkValidity() && notify()}
-      <ToastContainer ref={toastRef} className="toast" />
+      <ToastContainer />
     </div>
   );
 };

@@ -91,8 +91,8 @@ const App = () => {
 
         </div>
         <input type="submit" placeholder="Submit" id="submit" />
-
       </form>
+
       <div>
         {form.fullName && (
         <span>
@@ -118,7 +118,6 @@ const App = () => {
         </span>
         )}
         <br />
-
         <span>
           {form.humanOrRobot}
         </span>
